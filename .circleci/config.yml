@@ -7,7 +7,7 @@ jobs:
       - image: mashimine/circle_web
       
 
-    working_directory: /app
+    working_directory: ~/app
 
     steps:
       - checkout
