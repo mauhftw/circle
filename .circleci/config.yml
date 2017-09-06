@@ -16,7 +16,8 @@ jobs:
 
       - run:
          name: Install dependencies
-         command: sudo apt-get install curl
+         command: |
+             sudo apt-get install curl git
       - run:
          name: Install Docker Compose
          command: |
