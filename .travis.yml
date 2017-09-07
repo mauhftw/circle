@@ -1,17 +1,26 @@
+language: python
+
+python:
+   - "2.7"
+
 services:
    - docker
 
 env:
    - CONTAINER_NAME: 'flask'
-   - CONTAINER_IP: `docker exec ${CONTAINER_NAME}  ip a | grep 'eth0' | grep 'inet' | awk '{print $2}' | awk -F '/' '{print $1}'`
+   - PORT: `docker inspect ${CONTAINER_NAME} | grep -i -m 1 hostport | awk  '{print $2}' | sed s/\"//g`
+   - CONTAINER_IP: `docker exec ${CONTAINER_NAME}  ip a | grep 'eth0' | grep 'inet' | awk '{print $2}' | awk -F '/' '{print $1:"5000"}'`
 
 before_install:
    - docker build -t mashimine/circle .
    - docker-compose up -d
    - docker ps -a
 
+install:
+   - pip install requests
+
 script:
-   - if [ `curl ${CONTAINER_IP}:5000` == \"Hello world\" ]; then  echo 'TEST OK'; else echo 'TEST FAILED';  fi\"
+   - python test/web.py ${CONTAINER_IP} 
 
 
       
