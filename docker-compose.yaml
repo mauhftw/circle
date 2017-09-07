@@ -3,6 +3,7 @@ services:
  web:
    container_name: 'flask'
    build: .
+   hostname: 'flask'
    ports:
     - 5000:5000
 
