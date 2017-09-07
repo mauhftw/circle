@@ -9,18 +9,15 @@ services:
 env:
    - CONTAINER_NAME: 'flask'
 #   - PORT: ${docker inspect $CONTAINER_NAME | grep -i -m 1 hostport | awk  '{print $2}' | sed s/\"//g}
-   - CONTAINER_IP: $(docker exec $CONTAINER_NAME  ip a | grep 'eth0' | grep 'inet' | awk '{print $2}' | awk -F '/' '{print $1":5000"}')
+#   - CONTAINER_IP: $(docker exec $CONTAINER_NAME  ip a | grep 'eth0' | grep 'inet' | awk '{print $2}' | awk -F '/' '{print $1":5000"}')
 
 before_install:
    - docker build -t mashimine/circle .
    - docker-compose up -d
    - docker ps -a
 
-install:
-   - pip install requests
-
 script:
-   - python test/web.py $CONTAINER_IP 
+   - docker exec -it flask python test/web.py 0.0.0.0:50000 
 
 
       
