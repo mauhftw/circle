@@ -11,10 +11,7 @@ before_install:
    - docker ps -a
 
 script:
-   - if [ `curl ${CONTAINER_IP}:5000` == "Hello world" ]; then
-     echo 'TEST OK'; else
-     echo 'TEST FAILED';
-     fi
+   - if [ `curl ${CONTAINER_IP}:5000` == \"Hello world\" ]; then  echo 'TEST OK'; else echo 'TEST FAILED';  fi\"
 
 
       
