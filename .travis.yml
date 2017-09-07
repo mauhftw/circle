@@ -17,7 +17,7 @@ before_install:
    - docker ps -a
 
 script:
-   - docker exec -it flask python test/web.py 0.0.0.0:50000 
+   - docker exec -it flask python test/web.py 0.0.0.0:5000
 
 
       
