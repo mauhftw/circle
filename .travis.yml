@@ -3,6 +3,7 @@ services:
 
 env:
    - CONTAINER_NAME: 'flask'
+   - REPO: "mashimine/circle:v1"
 
 before_install:
    - docker build -t mashimine/circle .
@@ -11,6 +12,10 @@ before_install:
 
 script:
         - docker exec -it flask python test/web.py http://0.0.0.0:5000
+
+after_sucess:
+        - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+        - docker push $REPO
 
 
       
