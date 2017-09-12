@@ -1,7 +1,5 @@
 languages: python
-
-python:
-        - 2.7
+python: "2.7"
 
 services:
    - docker
@@ -11,17 +9,17 @@ env:
    - REPO: "mashimine/circle:v1"
 
 install:
-   - docker build -t $REPO .
+   - docker build -t "$REPO" .
    - docker-compose up -d
    - docker ps -a
 
 script:
-        - docker exec -it flask python test/web.py http://0.0.0.0:5000
+   - docker exec -it flask python test/web.py http://0.0.0.0:5000
 
 
 after_sucess:
-        - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-        - docker push $REPO
+   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+   - docker push "$REPO"
 
 deploy:
 #        we should add kubernetes deployment with ansible
