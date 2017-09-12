@@ -8,7 +8,7 @@ env:
    - CONTAINER_NAME="flask"
 
 install:
-   - docker build -t mashimine/circle:v2 .
+   - docker build -t mashimine/circle_web:v2 .
    - docker-compose up -d
    - docker ps -a
 
@@ -18,7 +18,7 @@ script:
 
 after_script:
    - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-   - docker push mashimine/circle:v2
+   - docker push mashimine/circle_web:v2
 
 deploy:
 #        we should add kubernetes deployment with ansible
