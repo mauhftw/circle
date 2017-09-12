@@ -1,4 +1,4 @@
-languages: python
+language: python
 python: "2.7"
 
 services:
@@ -9,7 +9,7 @@ env:
    - REPO: "mashimine/circle:v1"
 
 install:
-   - docker build -t "$REPO" .
+   - docker build -t $(REPO) .
    - docker-compose up -d
    - docker ps -a
 
@@ -19,7 +19,7 @@ script:
 
 after_sucess:
    - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-   - docker push "$REPO"
+   - docker push $(REPO)
 
 deploy:
 #        we should add kubernetes deployment with ansible
