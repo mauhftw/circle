@@ -1,0 +1,21 @@
+# An Ingress with 2 hosts and 3 endpoints
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: helloworld-rules
+spec:
+  rules:
+  - host: hello.example.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: hello
+          servicePort: 80
+  - host: world.example.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: world
+          servicePort: 80

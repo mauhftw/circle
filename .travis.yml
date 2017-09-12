@@ -1,3 +1,8 @@
+languages: python
+
+python:
+        - 2.7
+
 services:
    - docker
 
@@ -5,17 +10,21 @@ env:
    - CONTAINER_NAME: 'flask'
    - REPO: "mashimine/circle:v1"
 
-before_install:
-   - docker build -t mashimine/circle .
+install:
+   - docker build -t $REPO .
    - docker-compose up -d
    - docker ps -a
 
 script:
         - docker exec -it flask python test/web.py http://0.0.0.0:5000
 
+
 after_sucess:
         - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
         - docker push $REPO
+
+deploy:
+#        we should add kubernetes deployment with ansible
 
 
       
