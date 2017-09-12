@@ -8,7 +8,7 @@ env:
    - CONTAINER_NAME="flask"
 
 install:
-   - docker build -t mashimine/circle:v1 .
+   - docker build -t mashimine/circle:v2 .
    - docker-compose up -d
    - docker ps -a
 
@@ -16,9 +16,9 @@ script:
    - docker exec -it flask python test/web.py http://0.0.0.0:5000
 
 
-after_sucess:
+after_script:
    - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-   - docker push mashimine/circle:v1
+   - docker push mashimine/circle:v2
 
 deploy:
 #        we should add kubernetes deployment with ansible
