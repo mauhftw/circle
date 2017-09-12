@@ -5,11 +5,11 @@ services:
    - docker
 
 env:
-   - CONTAINER_NAME: 'flask'
-   - REPO: "mashimine/circle:v1"
+   - CONTAINER_NAME="flask"
+   - REPO="mashimine/circle:v1"
 
 install:
-   - docker build -t $(REPO) .
+   - docker build -t $REPO .
    - docker-compose up -d
    - docker ps -a
 
