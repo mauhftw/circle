@@ -21,7 +21,7 @@ after_script:
    - docker push mashimine/circle_web:v2
 
 deploy:
-#        we should add kubernetes deployment with ansible
+#        we should add kubernetes deployment with ansible!
 
 
       
